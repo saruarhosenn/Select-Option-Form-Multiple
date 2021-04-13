@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="Description" content="Enter your description here" />
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="cc.css">
+	<title>Select Form</title>
+</head>
+
+<body>
+	<br><br><br>
+	<h1>SELECT FORM</h1>
+	<br><br><br><br><br>
+
+	<!---- Select Form 1 ---->
+	<div class="wrapper">
+		<h2>Select Form-1 Only Html-Css </h2>
+		<br>
+		<div class="custom-select-form selectTagWrapper prefix-icon-arrow-down-fill">
+			<select>
+				<option selected>Select --</option>
+				<option value="Option 1">Option 1</option>
+				<option value="Option 2">Option 2</option>
+				<option value="Option 3">Option 3</option>
+				<option value="Option 4">Option 4</option>
+				<option value="Option 5">Option 5</option>
+				<option value="Option 6">Option 6</option>
+				<option value="Option 7">Option 7</option>
+				<option value="Option 8">Option 8</option>
+				<option value="Option 9">Option 9</option>
+				<option value="Option 10">Option 10</option>
+			</select>
+		</div>
+	</div>
+	<br><br><br><br>
+
+	<!---- Select Form 2 ---->
+	<div class="wrapper">
+		<h2>Select Form-2 Only Html-Css </h2>
+		<br>
+		<div class="c-select-form selectTagWrapper prefix-icon-arrow-down-fill">
+			<select>
+				<option selected>Select --</option>
+				<option value="Option 1">Option 1</option>
+				<option value="Option 2">Option 2</option>
+				<option value="Option 3">Option 3</option>
+				<option value="Option 4">Option 4</option>
+				<option value="Option 5">Option 5</option>
+				<option value="Option 6">Option 6</option>
+				<option value="Option 7">Option 7</option>
+				<option value="Option 8">Option 8</option>
+				<option value="Option 9">Option 9</option>
+				<option value="Option 10">Option 10</option>
+			</select>
+		</div>
+	</div>
+	<br><br><br><br>
+
+	<!---- Select Form 3 ---->
+	<div class="wrapper">
+		<h2>Select Form-3 Only Html-Css </h2>
+		<br>
+		<select class="select__item__form">
+			<option selected>Select -- $50</option>
+			<option value="$50">$50</option>
+			<option value="$50">$50</option>
+			<option value="$50">$50</option>
+			<option value="$50">$50</option>
+			<option value="$50">$50</option>
+			<option value="$50">$50</option>
+			<option value="$50">$50</option>
+			<option value="$50">$50</option>
+		</select>
+	</div>
+	<br><br><br><br>
+
+	<!---- Select Form 4 ---->
+	<div class="wrapper">
+		<h2>Select Form-4 Html-Css-jQuery </h2>
+		<br>
+		<select id="mounth" class="main-select">
+			<option class="option" value="hide">-- Month --</option>
+			<option class="option" value="january" rel="icon-temperature">January</option>
+			<option class="option" value="february">February</option>
+			<option class="option" value="march">March</option>
+			<option class="option" value="april">April</option>
+			<option class="option" value="may">May</option>
+			<option class="option" value="june">June</option>
+			<option class="option" value="july">July</option>
+			<option class="option" value="august">August</option>
+			<option class="option" value="september">September</option>
+			<option class="option" value="october">October</option>
+			<option class="option" value="november">November</option>
+			<option class="option" value="december">December</option>
+		</select>
+	</div>
+	<br><br><br><br>
+
+	<div class="wrapper">
+		<a style="font-size: 2rem;" target="_blank" href="https://andrejgajdos.com/custom-select-dropdown/">JS Animated Select Form</a>
+		<br>
+	</div>
+	<br><br><br><br>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+	<script>
+		$(document).ready(function() {
+			/*
+		Reference: http://jsfiddle.net/BB3JK/47/
+		*/
+			$('.main-select').each(function() {
+				var $this = $(this),
+					numberOfOptions = $(this).children('.option').length;
+
+				$this.addClass('select-hidden');
+				$this.wrap('<div class="select"></div>');
+				$this.after('<div class="select-styled"></div>');
+
+				var $styledSelect = $this.next('div.select-styled');
+				$styledSelect.text($this.children('.option').eq(0).text());
+
+				var $list = $('<ul />', {
+					'class': 'select-options'
+				}).insertAfter($styledSelect);
+
+				for (var i = 0; i < numberOfOptions; i++) {
+					$('<li />', {
+						text: $this.children('.option').eq(i).text(),
+						rel: $this.children('.option').eq(i).val()
+					}).appendTo($list);
+				}
+
+				var $listItems = $list.children('li');
+
+				$styledSelect.click(function(e) {
+					e.stopPropagation();
+					$('div.select-styled.active').not(this).each(function() {
+						$(this).removeClass('active').next('ul.select-options').hide();
+					});
+					$(this).toggleClass('active').next('ul.select-options').toggle();
+				});
+
+				$listItems.click(function(e) {
+					e.stopPropagation();
+					$styledSelect.text($(this).text()).removeClass('active');
+					$this.val($(this).attr('rel'));
+					$list.hide();
+					//console.log($this.val());
+				});
+
+				$(document).click(function() {
+					$styledSelect.removeClass('active');
+					$list.hide();
+				});
+
+			});
+
+		})
+
+	</script>
+</body>
+
+</html>
